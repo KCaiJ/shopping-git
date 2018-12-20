@@ -1,4 +1,5 @@
 package org.shopping.manager.controller;
+
 /**
  * 商品品牌
  */
@@ -23,92 +24,101 @@ public class BrandController {
 
 	@Reference
 	private BrandService Service;
-	
+
 	/**
 	 * 获取全部信息
+	 * 
 	 * @return
 	 */
-	 
+
 	@RequestMapping("/findAll")
-	public List<TbBrand> findAll(){			
+	public List<TbBrand> findAll() {
 		return Service.queryAll();
 	}
-	
+
 	/**
 	 * 返回分页列表
+	 * 
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/findPage")
-	public PageResult  findPage(int page,int rows){
-		return Service.queryPageListByWhere(new TbBrand(),page, rows);
+	public PageResult findPage(int page, int rows) {
+		return Service.queryPageListByWhere(new TbBrand(), page, rows);
 	}
 
 	/**
 	 * 增加
+	 * 
 	 * @param bean
 	 * @return
 	 */
-	
+
 	@RequestMapping("/add")
-	public Result  add(@RequestBody TbBrand bean){			
+	public Result add(@RequestBody TbBrand bean) {
 		try {
 			Service.save(bean);
-			return new Result(Enumeration.CODE_SUCCESS,true, Enumeration.INSETR_SUCCESS);
+			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.INSETR_SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(Enumeration.CODE_SUCCESS,false, Enumeration.INSETR_FAIL);
+			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.INSETR_FAIL);
 		}
 	}
+
 	/**
 	 * 批量删除
+	 * 
 	 * @param ids
 	 */
 	@RequestMapping("/delete")
-	public Result  delete(Long[] ids) {
+	public Result delete(Long[] ids) {
 		if (Service.delete(ids)) {
-			return new Result(Enumeration.CODE_SUCCESS,true, Enumeration.DELETE_SUCCESS); 
+			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.DELETE_SUCCESS);
 		}
-		return new Result(Enumeration.CODE_SUCCESS,false, Enumeration.DELETE_FAIL);
+		return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.DELETE_FAIL);
 
 	}
+
 	/**
 	 * 修改对象
+	 * 
 	 * @param brand
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result  update(@RequestBody TbBrand bean){			
+	public Result update(@RequestBody TbBrand bean) {
 		try {
 			Service.update(bean);
-			return new Result(Enumeration.CODE_SUCCESS,true, Enumeration.UPDATA_SUCCESS);
+			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.UPDATA_SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(Enumeration.CODE_SUCCESS,false, Enumeration.UPDATA_FAIL);
+			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.UPDATA_FAIL);
 		}
 	}
-	
+
 	/**
 	 * 根据id获取对象
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbBrand findOne(Long id){
-		return Service.queryById(id);		
+	public TbBrand findOne(Long id) {
+		return Service.queryById(id);
 	}
 
 	/**
 	 * 查询+分页
+	 * 
 	 * @param brand
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(int page, int rows ,@RequestBody TbBrand bean ){
-		return Service.findPage(bean, page, rows);		
+	public PageResult search(int page, int rows, @RequestBody TbBrand bean) {
+		return Service.findPage(bean, page, rows);
 	}
 
 }

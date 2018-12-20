@@ -136,7 +136,12 @@
 	    <artifactId>shiro-ehcache</artifactId>
 	    <version>1.4.0</version>
 	</dependency>
-	 
+
+	<dependency>
+		<groupId>org.shopping.project</groupId>
+		<artifactId>shopping-content-interface</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
    </dependencies>
   <build>
 	 <plugins>

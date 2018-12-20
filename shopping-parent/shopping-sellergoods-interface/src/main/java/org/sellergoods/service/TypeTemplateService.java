@@ -7,9 +7,10 @@ import org.shopping.pojo.TbTypeTemplate;
 
 import Base.BaseService;
 
-public interface TypeTemplateService extends BaseService<TbTypeTemplate>{
+public interface TypeTemplateService extends BaseService<TbTypeTemplate> {
 	/**
 	 * 返回规格列表
+	 * 
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")

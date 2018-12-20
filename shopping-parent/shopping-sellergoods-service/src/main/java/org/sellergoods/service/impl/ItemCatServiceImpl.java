@@ -19,25 +19,26 @@ import Base.BaseServiceImpl;
 import entity.PageResult;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
-@Service 
+
+@Service
 @Transactional
-public class ItemCatServiceImpl  extends  BaseServiceImpl<TbItemCat>  implements ItemCatService{
+public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements ItemCatService {
 	@Autowired
 	private TbItemCatMapper ItemCatMapper;
-	
+
 	/**
 	 * 查询+分页
 	 */
 	public PageResult findPage(TbItemCat bean, int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
-		Example example=new Example(TbItemCat.class);
-		Criteria criteria = example.createCriteria();		
-		if(bean!=null){
-			if(bean.getName()!=null && bean.getName().length()>0){
-				criteria.andLike("name", "%"+bean.getName()+"%");
+		PageHelper.startPage(pageNum, pageSize);
+		Example example = new Example(TbItemCat.class);
+		Criteria criteria = example.createCriteria();
+		if (bean != null) {
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				criteria.andLike("name", "%" + bean.getName() + "%");
 			}
-		}		
-		Page<TbItemCat> page= (Page<TbItemCat>)ItemCatMapper.selectByExample(example);	
+		}
+		Page<TbItemCat> page = (Page<TbItemCat>) ItemCatMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
@@ -46,30 +47,31 @@ public class ItemCatServiceImpl  extends  BaseServiceImpl<TbItemCat>  implements
 	 */
 	@Override
 	public List<TbItemCat> findByParentId(Long parentId) {
-		Example example=new Example(TbItemCat.class);
-		Criteria criteria = example.createCriteria();	
+		Example example = new Example(TbItemCat.class);
+		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("parentId", parentId);
 		return ItemCatMapper.selectByExample(example);
 	}
+
 	@Transactional
 	@Override
 	public boolean delete(Long[] ids) {
-		try{
-			for(Long id:ids){
-				List<TbItemCat>  itemCats=findByParentId(id);
-				for(TbItemCat bean:itemCats){
-					List<TbItemCat>  itemCats2=findByParentId(bean.getId());
-					for(TbItemCat bean2:itemCats2){
+		try {
+			for (Long id : ids) {
+				List<TbItemCat> itemCats = findByParentId(id);
+				for (TbItemCat bean : itemCats) {
+					List<TbItemCat> itemCats2 = findByParentId(bean.getId());
+					for (TbItemCat bean2 : itemCats2) {
 						ItemCatMapper.delete(bean2);
 					}
 					ItemCatMapper.delete(bean);
 				}
 				ItemCatMapper.deleteByPrimaryKey(id);
-			}	
+			}
 			return true;
-        }catch(Exception e){
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动回滚事务
-            return false;
-        }
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();// 手动回滚事务
+			return false;
+		}
 	}
 }

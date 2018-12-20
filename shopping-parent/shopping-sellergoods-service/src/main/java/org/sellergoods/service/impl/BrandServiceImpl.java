@@ -15,27 +15,28 @@ import Base.BaseServiceImpl;
 import entity.PageResult;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
-@Service 
-public class BrandServiceImpl  extends  BaseServiceImpl<TbBrand>  implements BrandService{
+
+@Service
+public class BrandServiceImpl extends BaseServiceImpl<TbBrand>implements BrandService {
 	@Autowired
 	private TbBrandMapper BrandMapper;
-	
+
 	/**
 	 * 查询+分页
 	 */
 	public PageResult findPage(TbBrand bean, int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
-		Example example=new Example(TbBrand.class);
-		Criteria criteria = example.createCriteria();		
-		if(bean!=null){
-			if(bean.getName()!=null && bean.getName().length()>0){
-				criteria.andLike("name", "%"+bean.getName()+"%");
+		PageHelper.startPage(pageNum, pageSize);
+		Example example = new Example(TbBrand.class);
+		Criteria criteria = example.createCriteria();
+		if (bean != null) {
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				criteria.andLike("name", "%" + bean.getName() + "%");
 			}
-			if(bean.getFirstChar()!=null && bean.getFirstChar().length()>0){
-				criteria.andEqualTo("firstChar",bean.getFirstChar());
-			}		
-		}		
-		Page<TbBrand> page= (Page<TbBrand>)BrandMapper.selectByExample(example);	
+			if (bean.getFirstChar() != null && bean.getFirstChar().length() > 0) {
+				criteria.andEqualTo("firstChar", bean.getFirstChar());
+			}
+		}
+		Page<TbBrand> page = (Page<TbBrand>) BrandMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 }

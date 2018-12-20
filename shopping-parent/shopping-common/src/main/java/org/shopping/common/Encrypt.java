@@ -1,7 +1,9 @@
 package org.shopping.common;
+
 import java.security.MessageDigest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+
 /**
  * 加密工具类
  * 
@@ -10,10 +12,10 @@ import java.security.NoSuchAlgorithmException;
  * sha加密出来的长度是40位
  * 
  */
- 
+
 public class Encrypt {
- 
-/**
+
+	/**
 	 * 加密
 	 * 
 	 * @param inputText
@@ -22,7 +24,7 @@ public class Encrypt {
 	public static String e(String inputText) {
 		return md5(inputText);
 	}
- 
+
 	/**
 	 * 二次加密，应该破解不了了吧？
 	 * 
@@ -32,7 +34,7 @@ public class Encrypt {
 	public static String md5AndSha(String inputText) {
 		return sha(md5(inputText));
 	}
- 
+
 	/**
 	 * md5加密
 	 * 
@@ -42,7 +44,7 @@ public class Encrypt {
 	public static String md5(String inputText) {
 		return encrypt(inputText, "md5");
 	}
- 
+
 	/**
 	 * sha加密
 	 * 
@@ -52,7 +54,7 @@ public class Encrypt {
 	public static String sha(String inputText) {
 		return encrypt(inputText, "sha-1");
 	}
- 
+
 	/**
 	 * md5或者sha-1加密
 	 * 
@@ -83,7 +85,7 @@ public class Encrypt {
 		}
 		return encryptText;
 	}
- 
+
 	/**
 	 * 返回十六进制字符串
 	 * 
@@ -97,5 +99,5 @@ public class Encrypt {
 		}
 		return sb.toString();
 	}
- 
+
 }
