@@ -1,4 +1,4 @@
-package org.shopping.seller.interceptor;
+package org.shopping.manager.interceptor;
 
 import java.io.PrintWriter;
 import javax.servlet.http.Cookie;
