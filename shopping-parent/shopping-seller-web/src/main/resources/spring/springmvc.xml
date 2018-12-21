@@ -48,6 +48,4 @@
 		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
 
-	<!-- <bean id="userDetailService" class="org.shopping.seller.service.UserDetailsServiceImpl" 
-		> <property name="sellerService" ref="sellerService"></property> </bean> -->
 </beans>

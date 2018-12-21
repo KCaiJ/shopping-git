@@ -291,5 +291,6 @@
 		<module>shopping-sellergoods-interface</module>
 		<module>shopping-sellergoods-service</module>
 		<module>shopping-content</module>
+		<module>shopping-portal-web</module>
 	</modules>
 </project>

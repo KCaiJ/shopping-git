@@ -23,7 +23,7 @@
 	  </mvc:message-converters>  
 	</mvc:annotation-driven>
 	<!-- 引用dubbo 服务 -->
-	<dubbo:application name="shopping-seller-web" />
+	<dubbo:application name="shopping-manager-web" />
 	<dubbo:registry address="zookeeper://111.230.235.99:2181"/>
 	<dubbo:annotation package="org.shopping.manager.controller" />  	
 	<!-- 配置拦截器 -->

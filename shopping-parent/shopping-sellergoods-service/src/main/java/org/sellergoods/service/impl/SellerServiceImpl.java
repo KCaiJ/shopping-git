@@ -39,7 +39,9 @@ public class SellerServiceImpl extends BaseServiceImpl<TbSeller>implements Selle
 			if (bean.getName() != null && bean.getName().length() > 0) {
 				criteria.andLike("name", "%" + bean.getName() + "%");
 			}
-			criteria.andEqualTo("status", "0");
+			if (bean.getStatus() != null && bean.getStatus().length() > 0) {
+				criteria.andEqualTo("status",  bean.getStatus() );
+			}
 		}
 		Page<TbSeller> page = (Page<TbSeller>) SellerMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
