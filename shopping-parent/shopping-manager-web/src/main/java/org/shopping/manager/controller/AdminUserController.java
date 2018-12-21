@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import entity.PageResult;
+import entity.Password;
 import entity.Result;
 
 @RestController
@@ -164,13 +165,33 @@ public class AdminUserController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/exit")
-	public Result Exit(String name, HttpServletRequest request, HttpServletResponse response)
+	public Result exit(String name, HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
 		Cookie cookie = new Cookie(Enumeration.CURRENT_ADMIN, URLEncoder.encode(name, "utf-8"));
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.SUCCESS);
+	}
+	
+	/**
+	 * 更改密码
+	 * @param bean
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping("/changepasswd")
+	public Result changepasswd(@RequestBody Password bean)throws UnsupportedEncodingException {
+		TbAdminUser user=findOne(bean.getName());
+		if (user==null) {
+			return new Result(Enumeration.CODE_LOGIN_NO, true, Enumeration.LOGIN_NO);
+		}
+		//校验原密码是否正确	
+		if(user.getPassword().equals(Encrypt.md5AndSha(bean.getOldPassword()))){
+			user.setPassword(Encrypt.md5AndSha(bean.getNewPassword()));
+			return update(user);
+		}
+		return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.PASSWORD_ERROR);
 	}
 
 }

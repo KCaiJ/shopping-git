@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-
 import entity.PageResult;
+import entity.Password;
 import entity.Result;
 
 @RestController
@@ -210,5 +210,25 @@ public class SellerController {
 		cookie2.setPath("/");
 		response.addCookie(cookie2);
 		return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.SUCCESS);
+	}
+	
+	/**
+	 * 更改密码
+	 * @param bean
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping("/changepasswd")
+	public Result changepasswd(@RequestBody Password bean)throws UnsupportedEncodingException {
+		TbSeller user=findOne(bean.getName());
+		if (user==null) {
+			return new Result(Enumeration.CODE_LOGIN_NO, true, Enumeration.LOGIN_NO);
+		}
+		//校验原密码是否正确	
+		if(user.getPassword().equals(Encrypt.md5AndSha(bean.getOldPassword()))){
+			user.setPassword(Encrypt.md5AndSha(bean.getNewPassword()));
+			return update(user);
+		}
+		return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.PASSWORD_ERROR);
 	}
 }

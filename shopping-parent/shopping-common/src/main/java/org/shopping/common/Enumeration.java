@@ -7,6 +7,8 @@ public class Enumeration {
 	public static String SUCCESS = "成功";
 	public static String FAIL = "失败";
 
+	public static String PASSWORD_ERROR = "密码错误";
+	
 	public static String DELETE_SUCCESS = "删除成功";
 	public static String DELETE_FAIL = "删除失败";
 

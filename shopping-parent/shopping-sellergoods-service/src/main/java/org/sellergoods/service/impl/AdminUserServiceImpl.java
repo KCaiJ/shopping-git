@@ -38,7 +38,9 @@ public class AdminUserServiceImpl extends BaseServiceImpl<TbAdminUser>implements
 	public Integer save(TbAdminUser param) {
 		return super.save(param);
 	}
-
+	/**
+	 * 根据id获取对象
+	 */
 	@Override
 	public TbAdminUser findOne(String id) {
 		Example example = new Example(TbAdminUser.class);
