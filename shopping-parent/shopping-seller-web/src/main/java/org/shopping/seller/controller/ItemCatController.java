@@ -121,6 +121,11 @@ public class ItemCatController {
 		return Service.findPage(bean, page, rows);
 	}
 
+	/**
+	 * 根据上级ID返回下级列表
+	 * @param parentId
+	 * @return
+	 */
 	@RequestMapping("/findByParentId")
 	public List<TbItemCat> findByParentId(Long parentId) {
 		return Service.findByParentId(parentId);

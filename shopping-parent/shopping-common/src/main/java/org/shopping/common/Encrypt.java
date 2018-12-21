@@ -26,7 +26,7 @@ public class Encrypt {
 	}
 
 	/**
-	 * 二次加密，应该破解不了了吧？
+	 * 二次加密
 	 * 
 	 * @param inputText
 	 * @return
@@ -76,7 +76,6 @@ public class Encrypt {
 			MessageDigest m = MessageDigest.getInstance(algorithmName);
 			m.update(inputText.getBytes("UTF8"));
 			byte s[] = m.digest();
-			// m.digest(inputText.getBytes("UTF8"));
 			return hex(s);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();

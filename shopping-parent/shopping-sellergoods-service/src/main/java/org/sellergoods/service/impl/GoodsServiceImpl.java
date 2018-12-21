@@ -125,6 +125,11 @@ public class GoodsServiceImpl extends BaseServiceImpl<TbGoods>implements GoodsSe
 		}
 	}
 
+	/**
+	 * 提取SKU提取
+	 * @param goods
+	 * @param item
+	 */
 	@SuppressWarnings("rawtypes")
 	private void setItemValus(Goods goods, TbItem item) {
 		item.setGoodsId(goods.getGoods().getId());// 商品SPU编号
@@ -139,11 +144,9 @@ public class GoodsServiceImpl extends BaseServiceImpl<TbGoods>implements GoodsSe
 		// 分类名称
 		TbItemCat itemCat = ItemCatMapper.selectByPrimaryKey(goods.getGoods().getCategory3Id());
 		item.setCategory(itemCat.getName());
-
 		// 商家名称
 		TbSeller seller = SellerMapper.selectByPrimaryKey(goods.getGoods().getSellerId());
 		item.setSeller(seller.getNickName());
-
 		// 图片地址（取spu的第一个图片）
 		List<Map> imageList = JSON.parseArray(goods.getGoodsDesc().getItemImages(), Map.class);
 		if (imageList.size() > 0) {

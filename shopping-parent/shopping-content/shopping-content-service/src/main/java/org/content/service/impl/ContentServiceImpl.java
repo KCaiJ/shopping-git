@@ -4,7 +4,6 @@ package org.content.service.impl;
  */
 
 import java.util.List;
-
 import org.content.service.ContentService;
 import org.shopping.mapper.TbContentMapper;
 import org.shopping.pojo.TbContent;
@@ -12,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-
 import Base.BaseServiceImpl;
 import entity.PageResult;
-import tk.mybatis.mapper.common.example.SelectByExampleMapper;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 

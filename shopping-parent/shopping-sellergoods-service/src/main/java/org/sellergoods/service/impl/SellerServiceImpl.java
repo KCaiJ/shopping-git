@@ -70,6 +70,9 @@ public class SellerServiceImpl extends BaseServiceImpl<TbSeller>implements Selle
 
 	}
 
+	/**
+	 * 根据商家ID获取实体
+	 */
 	@Override
 	public TbSeller findOne(String name) {
 		return SellerMapper.selectByPrimaryKey(name);

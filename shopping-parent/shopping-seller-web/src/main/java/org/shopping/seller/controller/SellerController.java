@@ -169,8 +169,6 @@ public class SellerController {
 				if (seller.getStatus().equals("3")) {
 					return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.SELLER_COLSE);
 				}
-				// request.getSession().setAttribute("seller",
-				// URLEncoder.encode(seller.getSellerId(),"utf-8"));
 				Cookie cookie = new Cookie(Enumeration.CURRENT_SELLER,
 						URLEncoder.encode(seller.getSellerId(), "utf-8"));
 				cookie.setMaxAge(3600 * 1);

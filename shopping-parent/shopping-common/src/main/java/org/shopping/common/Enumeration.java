@@ -1,5 +1,9 @@
 package org.shopping.common;
-
+/**
+ * 枚举类
+ * @author root
+ *
+ */
 public class Enumeration {
 	public static int CODE_SUCCESS = 200;
 	public static int CODE_LOGIN_NO = 102; // 未登录代码

@@ -1,7 +1,9 @@
 package Base;
 
 import java.util.List;
+
 import entity.PageResult;
+
 
 public interface BaseService<T> {
 	public T queryById(Long id);

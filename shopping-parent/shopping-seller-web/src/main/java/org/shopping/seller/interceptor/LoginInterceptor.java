@@ -31,8 +31,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (cookies != null && cookies.length > 0) {
 			for (Cookie c : cookies) {
 				if (Enumeration.CURRENT_SELLER.equals(c.getName())) {
-					// 拿到cookie名为Constants.BUYCART_COOKIE中的value
-					// String value = c.getValue(); //获取用户名
 					break;
 				}
 			}

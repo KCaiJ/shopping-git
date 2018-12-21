@@ -53,6 +53,9 @@ public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements Ite
 		return ItemCatMapper.selectByExample(example);
 	}
 
+	/**
+	 * 批量删除
+	 */
 	@Transactional
 	@Override
 	public boolean delete(Long[] ids) {

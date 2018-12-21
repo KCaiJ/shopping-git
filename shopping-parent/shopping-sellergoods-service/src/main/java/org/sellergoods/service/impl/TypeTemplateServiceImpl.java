@@ -48,6 +48,10 @@ public class TypeTemplateServiceImpl extends BaseServiceImpl<TbTypeTemplate>impl
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
+	
+	/**
+	 * 获取规格列表
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<Map> findSpecList(Long id) {

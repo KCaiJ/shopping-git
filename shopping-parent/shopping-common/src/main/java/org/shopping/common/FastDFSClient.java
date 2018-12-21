@@ -9,9 +9,6 @@ import org.csource.fastdfs.TrackerServer;
 
 /**
  * FastDFS图片上传工具类
- * 
- * @author root
- *
  */
 public class FastDFSClient {
 

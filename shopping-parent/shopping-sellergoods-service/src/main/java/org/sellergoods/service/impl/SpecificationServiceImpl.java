@@ -48,7 +48,9 @@ public class SpecificationServiceImpl extends BaseServiceImpl<TbSpecification>im
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
-	// 增加规格及规格详细
+	/**
+	 * 增加规格及规格详细
+	 */
 	@Transactional
 	@Override
 	public boolean save(Specification param) {
@@ -65,7 +67,10 @@ public class SpecificationServiceImpl extends BaseServiceImpl<TbSpecification>im
 			return false;
 		}
 	}
-
+	
+	/**
+	 * 根据id查规格
+	 */
 	@Override
 	public Specification findOne(Long id) {
 		// 查询规格
@@ -81,6 +86,9 @@ public class SpecificationServiceImpl extends BaseServiceImpl<TbSpecification>im
 		return spec;
 	}
 
+	/**
+	 * 批量删除
+	 */
 	@Transactional
 	@Override
 	public boolean delete(Long[] ids) {
