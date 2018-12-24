@@ -293,5 +293,7 @@
 		<module>shopping-sellergoods-service</module>
 		<module>shopping-content</module>
 		<module>shopping-portal-web</module>
+		<module>shopping-solr-util</module>
+		<module>shopping-search</module>
 	</modules>
 </project>

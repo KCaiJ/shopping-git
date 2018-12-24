@@ -3,19 +3,29 @@ package org.shopping.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
+
 import javax.persistence.*;
+
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Dynamic;
 
 @Table(name = "tb_item")
 public class TbItem implements Serializable {
+
+	
+
 	/**
 	 * 商品id，同时也是商品编号
 	 */
 	@Id
+	@Field
 	private Long id;
 
 	/**
 	 * 商品标题
 	 */
+	@Field("item_title")
 	private String title;
 
 	/**
@@ -27,6 +37,7 @@ public class TbItem implements Serializable {
 	/**
 	 * 商品价格，单位为：元
 	 */
+	@Field("item_price")
 	private BigDecimal price;
 
 	@Column(name = "stock_count")
@@ -45,6 +56,7 @@ public class TbItem implements Serializable {
 	/**
 	 * 商品图片
 	 */
+	@Field("item_image")
 	private String image;
 
 	/**
@@ -82,6 +94,7 @@ public class TbItem implements Serializable {
 	@Column(name = "is_default")
 	private String isDefault;
 
+	@Field("item_goodsid")
 	@Column(name = "goods_id")
 	private Long goodsId;
 
@@ -91,13 +104,30 @@ public class TbItem implements Serializable {
 	@Column(name = "cart_thumbnail")
 	private String cartThumbnail;
 
+	@Field("item_category")
 	private String category;
 
+	@Field("item_brand")
 	private String brand;
 
 	private String spec;
 
+	@Field("item_seller")
 	private String seller;
+
+	@Transient
+	@Dynamic
+	@Field("item_spec_*")
+	private Map<String,String> specMap;
+	 
+	 
+	public Map<String, String> getSpecMap() {
+		return specMap;
+	 }
+	 
+	public void setSpecMap(Map<String, String> specMap) {
+		this.specMap = specMap;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -477,6 +507,7 @@ public class TbItem implements Serializable {
 	public void setSeller(String seller) {
 		this.seller = seller;
 	}
+
 
 	@Override
 	public String toString() {
