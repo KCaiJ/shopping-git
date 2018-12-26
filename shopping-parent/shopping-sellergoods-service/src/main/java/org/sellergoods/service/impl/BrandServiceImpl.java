@@ -39,4 +39,7 @@ public class BrandServiceImpl extends BaseServiceImpl<TbBrand>implements BrandSe
 		Page<TbBrand> page = (Page<TbBrand>) BrandMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
+	
+	
+	
 }

@@ -1,6 +1,9 @@
 package org.sellergoods.service;
 
+import java.util.List;
+
 import org.shopping.pojo.TbGoods;
+import org.shopping.pojo.TbItem;
 import org.shopping.pojogroup.Goods;
 
 import Base.BaseService;
@@ -39,4 +42,14 @@ public interface GoodsService extends BaseService<TbGoods> {
 	 * @return
 	 */
 	public boolean isMarketable(Long[] ids, String status);
+	
+	
+	/**
+	 * 根据商品ID和状态查询实体  
+	 * @param goodsId
+	 * @param status
+	 * @return
+	 */
+	public List<TbItem> findItemListByGoodsIdandStatus(Long[] goodsIds, String status );
+
 }

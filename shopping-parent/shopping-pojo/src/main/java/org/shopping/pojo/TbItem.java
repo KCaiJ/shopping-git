@@ -79,6 +79,7 @@ public class TbItem implements Serializable {
 	/**
 	 * 更新时间
 	 */
+	@Field("item_updatetime")
 	@Column(name = "update_time")
 	private Date updateTime;
 

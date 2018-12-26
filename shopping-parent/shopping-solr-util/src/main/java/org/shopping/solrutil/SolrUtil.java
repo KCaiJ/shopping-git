@@ -38,9 +38,10 @@ public class SolrUtil {
 			Map specMap= JSON.parseObject(item.getSpec(),Map.class);//将spec字段中的json字符串转换为map
 			item.setSpecMap(specMap);//给带注解的字段赋值	
 		}	
+		
 		solrTemplate.saveBeans(itemList);
 		solrTemplate.commit();
-		System.out.println("===结束===");			
+		System.out.println("===结束==="+itemList.size());			
 	}	
 
 	@SuppressWarnings("resource")

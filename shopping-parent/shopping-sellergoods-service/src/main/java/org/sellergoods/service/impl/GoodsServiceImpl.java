@@ -3,6 +3,7 @@ package org.sellergoods.service.impl;
  * 商品SPU管理
  */
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -137,7 +138,7 @@ public class GoodsServiceImpl extends BaseServiceImpl<TbGoods>implements GoodsSe
 		item.setCategoryid(goods.getGoods().getCategory3Id());// 商品分类编号（3级）
 		item.setCreateTime(new Date());// 创建日期
 		item.setUpdateTime(new Date());// 修改日期
-		item.setStatus("1");
+		item.setStatus("1");//状态正常
 		// 品牌名称
 		TbBrand brand = BrandMapper.selectByPrimaryKey(goods.getGoods().getBrandId());
 		item.setBrand(brand.getName());
@@ -256,5 +257,20 @@ public class GoodsServiceImpl extends BaseServiceImpl<TbGoods>implements GoodsSe
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();// 手动回滚事务
 			return false;
 		}
+	}
+
+	/**
+	 * 根据商品ID和状态查询实体  
+	 * @param goodsIds
+	 * @param status
+	 * @return
+	 */
+	@Override
+	public List<TbItem> findItemListByGoodsIdandStatus(Long[] goodsIds, String status) {
+		Example example=new Example(TbItem.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andIn("goodsId", Arrays.asList(goodsIds));
+		criteria.andEqualTo("status",status);
+		return ItemMapper.selectByExample(example);
 	}
 }

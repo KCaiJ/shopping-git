@@ -295,5 +295,6 @@
 		<module>shopping-portal-web</module>
 		<module>shopping-solr-util</module>
 		<module>shopping-search</module>
+		<module>shopping-page</module>
 	</modules>
 </project>

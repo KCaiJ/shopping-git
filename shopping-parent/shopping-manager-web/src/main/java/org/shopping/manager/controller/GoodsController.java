@@ -5,9 +5,12 @@ package org.shopping.manager.controller;
  */
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import org.search.service.ItemSearchService;
 import org.sellergoods.service.GoodsService;
 import org.shopping.common.Enumeration;
 import org.shopping.pojo.TbGoods;
+import org.shopping.pojo.TbItem;
 import org.shopping.pojogroup.Goods;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,9 @@ import entity.Result;
 @RequestMapping("/Goods")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class GoodsController {
+
+	@Reference
+	private ItemSearchService itemSearchService;
 
 	@Reference
 	private GoodsService Service;
@@ -130,9 +136,18 @@ public class GoodsController {
 	@RequestMapping("/updateStatus")
 	public Result updateStatus(Long[] ids, String status) {
 		if (Service.updateStatus(ids, status)) {
+			if(status.equals("1")){//审核通过
+				List<TbItem> itemList = Service.findItemListByGoodsIdandStatus(ids, status);						
+				//调用搜索接口实现数据批量导入
+				if(itemList.size()>0){				
+					itemSearchService.importList(itemList);
+				}else{
+					System.out.println("没有明细数据");
+				}
+			}
 			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.UPDATA_SUCCESS);
 		}
-		return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.UPDATA_FAIL);
+		return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.UPDATA_FAIL);	
 	}
 
 }

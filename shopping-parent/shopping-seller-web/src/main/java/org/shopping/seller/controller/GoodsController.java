@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.dubbo.config.annotation.Reference;
-
 import entity.PageResult;
 import entity.Result;
 
@@ -99,7 +97,7 @@ public class GoodsController {
 		if (!goods2.getGoods().getSellerId().equals(sellerId)) {
 			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.ILLEGAL_EGAL);
 		}
-
+		
 		if (Service.update(bean)) {
 			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.UPDATA_SUCCESS);
 		}

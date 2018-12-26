@@ -9,6 +9,7 @@ import org.sellergoods.service.ItemCatService;
 import org.shopping.mapper.TbItemCatMapper;
 import org.shopping.pojo.TbItemCat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -25,7 +26,8 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements ItemCatService {
 	@Autowired
 	private TbItemCatMapper ItemCatMapper;
-
+	@Autowired
+	private RedisTemplate  redisTemplate;
 	/**
 	 * 查询+分页
 	 */
@@ -50,7 +52,18 @@ public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements Ite
 		Example example = new Example(TbItemCat.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("parentId", parentId);
+		saveToRedis();
 		return ItemCatMapper.selectByExample(example);
+	}
+	
+	/**
+	 * 缓存模板ID
+	 */
+	private void saveToRedis() {
+		List<TbItemCat> items=queryAll();
+		for (TbItemCat tbItemCat : items) {
+			redisTemplate.boundHashOps("itemCat").put(tbItemCat.getName(), tbItemCat.getTypeId());
+		}		
 	}
 
 	/**

@@ -9,9 +9,11 @@ import java.util.Map;
 import org.sellergoods.service.TypeTemplateService;
 import org.shopping.mapper.TbSpecificationOptionMapper;
 import org.shopping.mapper.TbTypeTemplateMapper;
+import org.shopping.pojo.TbItemCat;
 import org.shopping.pojo.TbSpecificationOption;
 import org.shopping.pojo.TbTypeTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.dubbo.config.annotation.Service;
@@ -31,6 +33,8 @@ public class TypeTemplateServiceImpl extends BaseServiceImpl<TbTypeTemplate>impl
 	private TbTypeTemplateMapper TypeTemplateMapper;
 	@Autowired
 	private TbSpecificationOptionMapper SpecificationOptionMapper;
+	@Autowired
+	private RedisTemplate  redisTemplate;
 
 	/**
 	 * 查询+分页
@@ -45,19 +49,34 @@ public class TypeTemplateServiceImpl extends BaseServiceImpl<TbTypeTemplate>impl
 			}
 		}
 		Page<TbTypeTemplate> page = (Page<TbTypeTemplate>) TypeTemplateMapper.selectByExample(example);
+		saveToRedis();
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
+
+	/**
+	 * 缓存品牌、规格列表
+	 */
+	private void saveToRedis() {
+		List<TbTypeTemplate> items=queryAll();
+		for (TbTypeTemplate tbTypeTemplate : items) {
+			//品牌列表
+			List bList=JSON.parseArray(tbTypeTemplate.getBrandIds(),Map.class);
+			redisTemplate.boundHashOps("brandList").put(tbTypeTemplate.getId(),bList);
+			//规格列表
+			List<Map> speclist=findSpecList(tbTypeTemplate.getId());
+			redisTemplate.boundHashOps("specList").put(tbTypeTemplate.getId(),speclist);
+		}		
+	}
+	
 	
 	/**
 	 * 获取规格列表
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<Map> findSpecList(Long id) {
 		// 查询模板
 		TbTypeTemplate typeTemplate = TypeTemplateMapper.selectByPrimaryKey(id);
-
 		List<Map> list = JSON.parseArray(typeTemplate.getSpecIds(), Map.class);
 		for (Map map : list) {
 			// 查询规格选项列表

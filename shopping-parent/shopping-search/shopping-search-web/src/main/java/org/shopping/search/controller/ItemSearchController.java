@@ -14,7 +14,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 public class ItemSearchController {
 	@Reference
 	private ItemSearchService itemSearchService;
-	
+	/**
+	 * 关键字搜索
+	 * @param searchMap
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("/search")
 	public Map<String, Object> search(@RequestBody Map searchMap ){
