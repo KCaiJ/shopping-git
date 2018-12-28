@@ -19,7 +19,6 @@ public class ItemSearchController {
 	 * @param searchMap
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	@RequestMapping("/search")
 	public Map<String, Object> search(@RequestBody Map searchMap ){
 		return  itemSearchService.search(searchMap);

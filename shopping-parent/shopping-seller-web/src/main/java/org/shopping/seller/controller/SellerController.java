@@ -29,30 +29,6 @@ public class SellerController {
 
 	@Reference
 	private SellerService Service;
-
-	/**
-	 * 获取全部信息
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping("/findAll")
-	public List<TbSeller> findAll() {
-		return Service.queryAll();
-	}
-
-	/**
-	 * 返回分页列表
-	 * 
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/findPage")
-	public PageResult findPage(int page, int rows) {
-		return Service.queryPageListByWhere(new TbSeller(), page, rows);
-	}
-
 	/**
 	 * 增加
 	 * 
@@ -73,19 +49,15 @@ public class SellerController {
 	}
 
 	/**
-	 * 批量删除
+	 * 根据id获取对象
 	 * 
-	 * @param ids
+	 * @param id
+	 * @return
 	 */
-	@RequestMapping("/delete")
-	public Result delete(Long[] ids) {
-		if (Service.delete(ids)) {
-			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.DELETE_SUCCESS);
-		}
-		return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.DELETE_FAIL);
-
+	@RequestMapping("/findOne")
+	public TbSeller findOne(String id) {
+		return Service.findOne(id);
 	}
-
 	/**
 	 * 修改对象
 	 * 
@@ -103,16 +75,6 @@ public class SellerController {
 		}
 	}
 
-	/**
-	 * 根据id获取对象
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/findOne")
-	public TbSeller findOne(String id) {
-		return Service.findOne(id);
-	}
 
 	/**
 	 * 查询+分页
@@ -218,7 +180,7 @@ public class SellerController {
 	 */
 	@RequestMapping("/changepasswd")
 	public Result changepasswd(@RequestBody Password bean)throws UnsupportedEncodingException {
-		TbSeller user=findOne(bean.getName());
+		TbSeller user=Service.findOne(bean.getName());
 		if (user==null) {
 			return new Result(Enumeration.CODE_LOGIN_NO, true, Enumeration.LOGIN_NO);
 		}

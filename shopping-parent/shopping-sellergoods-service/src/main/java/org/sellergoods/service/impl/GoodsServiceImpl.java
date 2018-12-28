@@ -131,7 +131,6 @@ public class GoodsServiceImpl extends BaseServiceImpl<TbGoods>implements GoodsSe
 	 * @param goods
 	 * @param item
 	 */
-	@SuppressWarnings("rawtypes")
 	private void setItemValus(Goods goods, TbItem item) {
 		item.setGoodsId(goods.getGoods().getId());// 商品SPU编号
 		item.setSellerId(goods.getGoods().getSellerId());// 商家编号

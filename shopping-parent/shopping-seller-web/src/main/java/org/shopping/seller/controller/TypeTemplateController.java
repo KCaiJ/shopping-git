@@ -129,7 +129,6 @@ public class TypeTemplateController {
 	 * @param id
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	@RequestMapping("/findSpecList")
 	public List<Map> findSpecList(Long id) {
 		return Service.findSpecList(id);

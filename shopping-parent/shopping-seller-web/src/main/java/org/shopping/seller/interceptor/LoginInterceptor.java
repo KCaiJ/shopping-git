@@ -27,26 +27,25 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		// 在拦截点执行前拦截，如果返回true则不执行拦截点后的操作（拦截成功） 返回false则不执行拦截
+		boolean is=false;
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null && cookies.length > 0) {
 			for (Cookie c : cookies) {
 				if (Enumeration.CURRENT_SELLER.equals(c.getName())) {
-					break;
+					return true;
 				}
 			}
-			return true;
-		} else {
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			Result result = new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.LOGIN_NO);
-			JSONObject jsonObject = JSONObject.fromObject(result);
-			out.println(jsonObject.toString());
-			out.flush();
-			out.close();
-			return false;
+			return is;
 		}
-
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		Result result = new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.LOGIN_NO);
+		JSONObject jsonObject = JSONObject.fromObject(result);
+		out.println(jsonObject.toString());
+		out.flush();
+		out.close();
+		return false;
 	}
 
 }

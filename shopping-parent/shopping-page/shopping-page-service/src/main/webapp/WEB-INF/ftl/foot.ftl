@@ -99,13 +99,19 @@
 							<li>夺宝岛</li>
 							<li>DIY装机</li>
 							<li>延保服务</li>
-							<li>品优购E卡</li>
-							<li>品优购通信</li>
+							<li>商城E卡</li>
+							<li>商城通信</li>
 						</ul>
 					</div>
 					<div class="yui3-u-1-6">
-						<h4>帮助中心</h4>
-						<img src="img/wx_cz.jpg">
+						<h4>特色服务</h4>
+						<ul class="unstyled">
+							<li>夺宝岛</li>
+							<li>DIY装机</li>
+							<li>延保服务</li>
+							<li>商城E卡</li>
+							<li>商城通信</li>
+						</ul>
 					</div>
 				</div>
 			</div>

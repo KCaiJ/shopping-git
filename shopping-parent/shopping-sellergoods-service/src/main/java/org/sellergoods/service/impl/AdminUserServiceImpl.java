@@ -32,13 +32,6 @@ public class AdminUserServiceImpl extends BaseServiceImpl<TbAdminUser>implements
 	}
 
 	/**
-	 * 增加
-	 */
-	@Override
-	public Integer save(TbAdminUser param) {
-		return super.save(param);
-	}
-	/**
 	 * 根据id获取对象
 	 */
 	@Override

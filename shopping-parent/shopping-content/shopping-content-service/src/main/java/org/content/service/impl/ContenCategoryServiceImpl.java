@@ -17,7 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Service
-public class ContenCategoryServiceImpl extends BaseServiceImpl<TbContentCategory>implements ContentCategoryService {
+public class ContenCategoryServiceImpl extends BaseServiceImpl<TbContentCategory> implements ContentCategoryService {
 	@Autowired
 	private TbContentCategoryMapper ContenCategoryMapper;
 

@@ -64,6 +64,7 @@ public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements Ite
 		for (TbItemCat tbItemCat : items) {
 			redisTemplate.boundHashOps("itemCat").put(tbItemCat.getName(), tbItemCat.getTypeId());
 		}		
+		System.out.println("缓存模板列表");
 	}
 
 	/**

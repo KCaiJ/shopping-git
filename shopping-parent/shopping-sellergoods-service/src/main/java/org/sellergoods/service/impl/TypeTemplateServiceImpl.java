@@ -66,7 +66,8 @@ public class TypeTemplateServiceImpl extends BaseServiceImpl<TbTypeTemplate>impl
 			//规格列表
 			List<Map> speclist=findSpecList(tbTypeTemplate.getId());
 			redisTemplate.boundHashOps("specList").put(tbTypeTemplate.getId(),speclist);
-		}		
+		}	
+		System.out.println("缓存品牌和规格列表");
 	}
 	
 	

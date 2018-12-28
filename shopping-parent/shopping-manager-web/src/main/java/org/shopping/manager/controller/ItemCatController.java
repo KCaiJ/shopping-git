@@ -120,7 +120,11 @@ public class ItemCatController {
 	public PageResult search(int page, int rows, @RequestBody TbItemCat bean) {
 		return Service.findPage(bean, page, rows);
 	}
-
+	/**
+	 * 根据父ID获取子目录
+	 * @param parentId
+	 * @return
+	 */
 	@RequestMapping("/findByParentId")
 	public List<TbItemCat> findByParentId(Long parentId) {
 		return Service.findByParentId(parentId);

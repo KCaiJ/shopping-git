@@ -21,10 +21,9 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Service
-public class ContentServiceImpl extends BaseServiceImpl<TbContent>implements ContentService {
+public class ContentServiceImpl extends BaseServiceImpl<TbContent> implements ContentService {
 	@Autowired
 	private TbContentMapper ContentMapper;
-	@SuppressWarnings("rawtypes")
 	@Autowired
 	private RedisTemplate redisTemplate;	
 
@@ -76,7 +75,6 @@ public class ContentServiceImpl extends BaseServiceImpl<TbContent>implements Con
 	 * @param ids
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public boolean delete(Long[] ids) {
 		try {
@@ -95,7 +93,6 @@ public class ContentServiceImpl extends BaseServiceImpl<TbContent>implements Con
 	/**
 	 * 根据类型查询广告
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbContent> findByCategoryId(Long categoryId) {
 		List<TbContent> contentList= (List<TbContent>) redisTemplate.boundHashOps("content").get(categoryId);

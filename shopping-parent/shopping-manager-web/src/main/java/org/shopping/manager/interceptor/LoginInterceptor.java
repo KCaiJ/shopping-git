@@ -31,23 +31,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (cookies != null && cookies.length > 0) {
 			for (Cookie c : cookies) {
 				if (Enumeration.CURRENT_ADMIN.equals(c.getName())) {
-					// 拿到cookie名为Constants.BUYCART_COOKIE中的value
-					// String value = c.getValue(); //获取用户名
-					break;
+					return true;
 				}
 			}
-			return true;
-		} else {
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			Result result = new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.LOGIN_NO);
-			JSONObject jsonObject = JSONObject.fromObject(result);
-			out.println(jsonObject.toString());
-			out.flush();
-			out.close();
-			return false;
 		}
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		Result result = new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.LOGIN_NO);
+		JSONObject jsonObject = JSONObject.fromObject(result);
+		out.println(jsonObject.toString());
+		out.flush();
+		out.close();
+		return false;
 	}
-
 }

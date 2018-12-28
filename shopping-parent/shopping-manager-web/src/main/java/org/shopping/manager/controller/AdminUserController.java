@@ -32,29 +32,6 @@ public class AdminUserController {
 	private AdminUserService Service;
 
 	/**
-	 * 获取全部信息
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping("/findAll")
-	public List<TbAdminUser> findAll() {
-		return Service.queryAll();
-	}
-
-	/**
-	 * 返回分页列表
-	 * 
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/findPage")
-	public PageResult findPage(int page, int rows) {
-		return Service.queryPageListByWhere(new TbAdminUser(), page, rows);
-	}
-
-	/**
 	 * 增加
 	 * 
 	 * @param bean
@@ -72,21 +49,6 @@ public class AdminUserController {
 			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.INSETR_FAIL);
 		}
 	}
-
-	/**
-	 * 批量删除
-	 * 
-	 * @param ids
-	 */
-	@RequestMapping("/delete")
-	public Result delete(Long[] ids) {
-		if (Service.delete(ids)) {
-			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.DELETE_SUCCESS);
-		}
-		return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.DELETE_FAIL);
-
-	}
-
 	/**
 	 * 修改对象
 	 * 
@@ -104,29 +66,7 @@ public class AdminUserController {
 		}
 	}
 
-	/**
-	 * 根据id获取对象
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/findOne")
-	public TbAdminUser findOne(String name) {
-		return Service.findOne(name);
-	}
 
-	/**
-	 * 查询+分页
-	 * 
-	 * @param AdminUser
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/search")
-	public PageResult search(int page, int rows, @RequestBody TbAdminUser bean) {
-		return Service.findPage(bean, page, rows);
-	}
 
 	/**
 	 * 运营商登录接口
@@ -138,7 +78,7 @@ public class AdminUserController {
 	@RequestMapping("/login")
 	public Result sellerLogin(@RequestBody TbAdminUser bean, HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		TbAdminUser adminUser = findOne(bean.getUsername());
+		TbAdminUser adminUser = Service.findOne(bean.getUsername());
 		if (adminUser != null) {
 			if (Encrypt.md5AndSha(bean.getPassword()).equals(adminUser.getPassword())) {
 				// request.getSession().setAttribute("admin",
@@ -182,7 +122,7 @@ public class AdminUserController {
 	 */
 	@RequestMapping("/changepasswd")
 	public Result changepasswd(@RequestBody Password bean)throws UnsupportedEncodingException {
-		TbAdminUser user=findOne(bean.getName());
+		TbAdminUser user=Service.findOne(bean.getName());
 		if (user==null) {
 			return new Result(Enumeration.CODE_LOGIN_NO, true, Enumeration.LOGIN_NO);
 		}

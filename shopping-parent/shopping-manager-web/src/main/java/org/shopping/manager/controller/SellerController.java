@@ -54,25 +54,6 @@ public class SellerController {
 	}
 
 	/**
-	 * 增加
-	 * 
-	 * @param bean
-	 * @return
-	 */
-
-	@RequestMapping("/add")
-	public Result add(@RequestBody TbSeller bean) {
-		try {
-			bean.setPassword(Encrypt.md5AndSha(bean.getPassword()));
-			Service.save(bean);
-			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.INSETR_SUCCESS);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.INSETR_FAIL);
-		}
-	}
-
-	/**
 	 * 批量删除
 	 * 
 	 * @param ids
@@ -144,71 +125,5 @@ public class SellerController {
 			e.printStackTrace();
 			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.FAIL);
 		}
-	}
-
-	/**
-	 * 商家登录接口
-	 * 
-	 * @param bean
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	@RequestMapping("/login")
-	public Result sellerLogin(@RequestBody TbSeller bean, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
-		TbSeller seller = Service.login(bean.getSellerId());
-		if (seller != null) {
-			if (Encrypt.md5AndSha(bean.getPassword()).equals(seller.getPassword())) {
-				// 登录成功
-				if (seller.getStatus().equals("0")) {
-					return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.SELLER_AUDIT);
-				}
-				if (seller.getStatus().equals("2")) {
-					return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.SELLER_AUDIT_FAILED);
-				}
-				if (seller.getStatus().equals("3")) {
-					return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.SELLER_COLSE);
-				}
-				// request.getSession().setAttribute("seller",
-				// URLEncoder.encode(seller.getSellerId(),"utf-8"));
-				Cookie cookie = new Cookie(Enumeration.CURRENT_SELLER,
-						URLEncoder.encode(seller.getSellerId(), "utf-8"));
-				cookie.setMaxAge(3600 * 1);
-				cookie.setPath("/");
-				response.addCookie(cookie);
-				Cookie cookie2 = new Cookie(Enumeration.CURRENT_SELLER_NAME,
-						URLEncoder.encode(seller.getName(), "utf-8"));
-				cookie2.setMaxAge(3600 * 1);
-				cookie2.setPath("/");
-				response.addCookie(cookie2);
-				return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.SUCCESS);
-			}
-			return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.PASSWORD_NO);
-		}
-		return new Result(Enumeration.CODE_LOGIN_NO, false, Enumeration.USERNAME_NO);
-	}
-
-	/**
-	 * 注销
-	 * 
-	 * @param sellerId
-	 * @param name
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	@RequestMapping("/exit")
-	public Result Exit(String sellerId, String name, HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
-		Cookie cookie = new Cookie(Enumeration.CURRENT_SELLER, URLEncoder.encode(sellerId, "utf-8"));
-		cookie.setMaxAge(0);
-		cookie.setPath("/");
-		response.addCookie(cookie);
-		Cookie cookie2 = new Cookie(Enumeration.CURRENT_SELLER_NAME, URLEncoder.encode(name, "utf-8"));
-		cookie2.setMaxAge(0);
-		cookie2.setPath("/");
-		response.addCookie(cookie2);
-		return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.SUCCESS);
 	}
 }

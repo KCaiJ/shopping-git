@@ -96,16 +96,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.shopping.project</groupId>
-			<artifactId>shopping-sellergoods-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.shopping.project</groupId>
-			<artifactId>shopping-content-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.shopping.project</groupId>
 			<artifactId>shopping-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -119,6 +109,13 @@
 			<artifactId>shopping-page-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+			<version>5.13.4</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -23,8 +23,7 @@ import org.springframework.data.solr.core.query.result.GroupResult;
 import org.springframework.data.solr.core.query.result.ScoredPage;
 import com.alibaba.dubbo.config.annotation.Service;
 
-@SuppressWarnings("rawtypes")
-@Service(timeout = 3000)
+@Service
 public class ItemSearchServiceImpl implements ItemSearchService {
 	@Autowired
 	private SolrTemplate solrTemplate;
@@ -197,6 +196,18 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 	@Override
 	public void importList(List list) {
 		solrTemplate.saveBeans(list);	
+		solrTemplate.commit();
+	}
+
+	/**
+	 * 从solr删除数据
+	 */
+	@Override
+	public void deleteByGoodsIds(List goodsIds) {		
+		Query query=new SimpleQuery("*:*");		
+		Criteria criteria=new Criteria("item_goodsid").in(goodsIds);
+		query.addCriteria(criteria);		
+		solrTemplate.delete(query);
 		solrTemplate.commit();
 	}
 }
