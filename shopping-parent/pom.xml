@@ -296,5 +296,7 @@
 		<module>shopping-solr-util</module>
 		<module>shopping-search</module>
 		<module>shopping-page</module>
+		<module>shopping-user</module>
+		<module>shopping-cart</module>
 	</modules>
 </project>

@@ -13,6 +13,10 @@ public class Enumeration {
 
 	public static String PASSWORD_ERROR = "密码错误";
 	
+	public static String CODE_SEND_ERROR = "验证码输入错误";
+	public static String CODE_SEND_SUCCESS = "验证码发送成功";
+	public static String CODE_SEND_FAIL = "验证码发送失败";
+	
 	public static String DELETE_SUCCESS = "删除成功";
 	public static String DELETE_FAIL = "删除失败";
 
@@ -32,6 +36,7 @@ public class Enumeration {
 	public static String CURRENT_SELLER = "seller";
 	public static String CURRENT_SELLER_NAME = "seller_name";
 	public static String CURRENT_ADMIN = "admin";
+	public static String CURRENT_USER = "user";
 
 	public static String SELLER_AUDIT = "待审核";
 	public static String SELLER_AUDIT_FAILED = "审核未通过";

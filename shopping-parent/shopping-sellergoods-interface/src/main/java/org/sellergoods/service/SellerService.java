@@ -14,5 +14,5 @@ public interface SellerService extends BaseService<TbSeller> {
 
 	public TbSeller findOne(String name);
 
-	public TbSeller login(String name);
+	public TbSeller findByName(String name);
 }

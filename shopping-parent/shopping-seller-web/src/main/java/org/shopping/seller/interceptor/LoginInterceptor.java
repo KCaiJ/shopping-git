@@ -35,7 +35,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 					return true;
 				}
 			}
-			return is;
 		}
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

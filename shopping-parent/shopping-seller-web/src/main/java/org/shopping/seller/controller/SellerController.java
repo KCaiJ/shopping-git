@@ -118,7 +118,7 @@ public class SellerController {
 	@RequestMapping("/login")
 	public Result sellerLogin(@RequestBody TbSeller bean, HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		TbSeller seller = Service.login(bean.getSellerId());
+		TbSeller seller = Service.findByName(bean.getSellerId());
 		if (seller != null) {
 			if (Encrypt.md5AndSha(bean.getPassword()).equals(seller.getPassword())) {
 				// 登录成功

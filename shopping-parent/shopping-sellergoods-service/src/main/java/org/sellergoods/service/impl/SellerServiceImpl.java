@@ -82,7 +82,7 @@ public class SellerServiceImpl extends BaseServiceImpl<TbSeller>implements Selle
 	 * 根据商家用户名查询 验证登录
 	 */
 	@Override
-	public TbSeller login(String name) {
+	public TbSeller findByName(String name) {
 		Example example = new Example(TbSeller.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("sellerId", name);
