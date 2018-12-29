@@ -24,19 +24,8 @@
 	</mvc:annotation-driven>
 
 	<!-- 引用dubbo 服务 -->
-	<dubbo:application name="shopping-user-web" />
-	<dubbo:registry address="zookeeper://111.230.235.99:2181" />
-	<dubbo:annotation package="org.user.controller" /> 
+	<dubbo:application name="shopping-order-web" />
+	<dubbo:registry address="zookeeper://111.230.235.99:2181"/>
+	<dubbo:annotation package="org.shopping.order.controller" />  	
 
-	<!-- 配置拦截器 -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-		<!-- mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截-->
-			<mvc:exclude-mapping path="/User/login.do" />
-			<mvc:exclude-mapping path="/User/add.do" />
-			<bean class="org.user.interceptor.LoginInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	
 </beans>

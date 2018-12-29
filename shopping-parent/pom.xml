@@ -298,5 +298,6 @@
 		<module>shopping-page</module>
 		<module>shopping-user</module>
 		<module>shopping-cart</module>
+		<module>shopping-order</module>
 	</modules>
 </project>

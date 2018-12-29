@@ -45,7 +45,6 @@ public class CartController {
 			cartListString="[]";
 		}
 		cartListString=URLDecoder.decode(cartListString,"utf-8");
-		System.out.println(cartListString);
 		List<Cart> cartList_cookie = JSON.parseArray(cartListString, Cart.class);
 		//未登录
 		if (username == null) {
@@ -57,10 +56,10 @@ public class CartController {
 				//合并购物车
 				cartList_redis=cartService.mergeCartList(cartList_redis, cartList_cookie);	
 				//清除cookie的数据
-				/*Cookie cookie = new Cookie(Enumeration.COOKIE_CART_NAME,URLEncoder.encode("", "utf-8"));
+				Cookie cookie = new Cookie(Enumeration.COOKIE_CART_NAME,URLEncoder.encode("", "utf-8"));
 				cookie.setMaxAge(0);
 				cookie.setPath("/");
-				response.addCookie(cookie);	*/
+				response.addCookie(cookie);	
 				//将合并后的数据存入redis 
 				cartService.saveCartListToRedis(username, cartList_redis); 
 			}			
