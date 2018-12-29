@@ -37,6 +37,9 @@ public class Enumeration {
 	public static String CURRENT_SELLER_NAME = "seller_name";
 	public static String CURRENT_ADMIN = "admin";
 	public static String CURRENT_USER = "user";
+	public static String COOKIE_CART_NAME = "cartList";
+	
+	
 
 	public static String SELLER_AUDIT = "待审核";
 	public static String SELLER_AUDIT_FAILED = "审核未通过";
