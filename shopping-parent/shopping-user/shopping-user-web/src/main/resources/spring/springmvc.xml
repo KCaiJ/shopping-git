@@ -35,6 +35,7 @@
 		<!-- mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截-->
 			<mvc:exclude-mapping path="/User/login.do" />
 			<mvc:exclude-mapping path="/User/add.do" />
+			<mvc:exclude-mapping path="/User/sendCode.do" />
 			<bean class="org.user.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

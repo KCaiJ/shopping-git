@@ -94,6 +94,11 @@
 			<artifactId>shopping-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.shopping.project</groupId>
+			<artifactId>shopping-order-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

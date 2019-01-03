@@ -54,8 +54,6 @@ public class SellerServiceImpl extends BaseServiceImpl<TbSeller>implements Selle
 	public Integer save(TbSeller param) {
 		param.setStatus("0");
 		param.setCreateTime(new Date());
-		param.getPassword();
-		// String encryptSHA = SHAencrypt.encryptSHA("Yan230Kd");
 		return super.save(param);
 	}
 
@@ -67,7 +65,6 @@ public class SellerServiceImpl extends BaseServiceImpl<TbSeller>implements Selle
 		TbSeller seller = SellerMapper.selectByPrimaryKey(sellerId);
 		seller.setStatus(status);
 		SellerMapper.updateByPrimaryKey(seller);
-
 	}
 
 	/**

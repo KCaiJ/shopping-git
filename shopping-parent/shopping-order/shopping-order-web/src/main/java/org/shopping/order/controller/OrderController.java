@@ -11,6 +11,7 @@ import org.oder.service.OrderService;
 import org.shopping.common.CookUtils;
 import org.shopping.common.Enumeration;
 import org.shopping.pojo.TbOrder;
+import org.shopping.pojogroup.Order;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -115,6 +116,11 @@ public class OrderController {
 	public TbOrder findOne(Long id) {
 		return Service.queryById(id);
 	}
+	
+	@RequestMapping("/findByOrderId")
+	public Order findByOrderId(Long orderid) {
+		return Service.findByOrderId(orderid);
+	}
 
 	/**
 	 * 查询+分页
@@ -128,5 +134,50 @@ public class OrderController {
 	public PageResult search(int page, int rows, @RequestBody TbOrder bean) {
 		return Service.findPage(bean, page, rows);
 	}
-
+	
+	/**
+	 * 根据用户名和状态返回订单列表
+	 * @param status
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/findByUserName")
+	public List<Order> findByUserName( String status,HttpServletRequest request){
+		String userId = CookUtils.getCookieName(request, Enumeration.CURRENT_USER);//获取登录用户名
+		return Service.findByUserName("userId",userId,status);
+	}
+	
+	/**
+	 * 根据商家ID和状态返回订单列表
+	 * @param status
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/findBySellerId")
+	public List<Order> findBySellerId(String status,HttpServletRequest request){
+		String sellerId = CookUtils.getCookieName(request, Enumeration.CURRENT_SELLER);//获取登录用户名
+		if (sellerId==null) {
+			return null;
+		}
+		return Service.findByUserName("sellerId",sellerId,status);
+	}
+	
+	/**
+	 * 更改订单状态
+	 * @param id
+	 * @param stauts
+	 * @return
+	 */
+	@RequestMapping("/UpdateOrderStatus")
+	public Result findBySellerId(Long id,String stauts){
+		TbOrder order=findOne(id);
+		order.setStatus(stauts);
+		try {
+			Service.update(order);
+			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.UPDATA_SUCCESS);
+		} catch (Exception e) {
+			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.UPDATA_FAIL);
+		}
+		
+	}
 }

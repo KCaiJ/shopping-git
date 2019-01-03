@@ -9,4 +9,6 @@ import Base.BaseService;
 public interface ItemCatService extends BaseService<TbItemCat> {
 	public List<TbItemCat> findByParentId(Long parentId);
 
+	public List<TbItemCat> findByParentIdWEB(Long parentId);
+
 }

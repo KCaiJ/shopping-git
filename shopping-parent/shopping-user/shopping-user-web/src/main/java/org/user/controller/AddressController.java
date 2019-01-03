@@ -1,7 +1,8 @@
 package org.user.controller;
 
+import java.util.Date;
 /**
- * 地址品牌
+ * 地址
  */
 import java.util.List;
 
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.shopping.common.CookUtils;
 import org.shopping.common.Enumeration;
 import org.shopping.pojo.TbAddress;
+import org.shopping.pojo.TbAreas;
+import org.shopping.pojo.TbCities;
+import org.shopping.pojo.TbProvinces;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +66,8 @@ public class AddressController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbAddress bean) {
 		try {
+			bean.setIsDefault("0");
+			bean.setCreateDate(new Date());
 			Service.save(bean);
 			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.INSETR_SUCCESS);
 		} catch (Exception e) {
@@ -134,5 +140,63 @@ public class AddressController {
 		return Service.findListByUserId(username);
 	}
 
+	/**
+	 * 设置默认地址
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/setteingDefault")
+	public Result setteingDefault(Long id,HttpServletRequest request ){
+		String username = CookUtils.getCookieName(request, Enumeration.CURRENT_USER);//获取登录用户名
+		if( Service.setteingDefault(id,username)){
+			return new Result(Enumeration.CODE_SUCCESS, true, Enumeration.UPDATA_SUCCESS);
+		}else{
+			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.UPDATA_FAIL);
+		}
+	}
+	
+	/**
+	 * 根据省份ID查市区
+	 */
+	@RequestMapping("/findByCityId")
+	public List<TbCities> findByCityId(String parentId){
+		return Service.findByCityId(parentId);
+	}
+	
+	/**
+	 * 根据市区ID查县区
+	 */
+	@RequestMapping("/findByAreasId")
+	public List<TbAreas> findByAreasId(String parentId){
+		return Service.findByAreasId(parentId);
+	}
+	/**
+	 * 返回省份列表
+	 * @param parentId
+	 * @return
+	 */
+	@RequestMapping("/findByProvinces")
+	public List<TbProvinces> findByProvinces(){
+		return Service.findByProvinces();
+	}
+	
+	/**
+	 * 返回城市列表
+	 * @return
+	 */
+	@RequestMapping("/findByCities")
+	public List<TbCities> findByCities(){
+		return Service.findByCities();
+	}
+	
 
+	/**
+	 * 返回县区列表
+	 * @return
+	 */
+	@RequestMapping("/findByAreas")
+	public List<TbAreas> findByAreas(){
+		return Service.findByAreas();
+	}
 }

@@ -26,12 +26,19 @@ public class Enumeration {
 	public static String UPDATA_SUCCESS = "修改成功";
 	public static String UPDATA_FAIL = "修改失败";
 
+	
+	public static String PAY_SUCCESS = "支付成功";
+	public static String PAY_FAIL = "支付失败";
+	public static String PAY_TIMEOUT =  "二维码超时";
+	
+
 	public static String LOGIN_NO = "未登录";
 	public static String LOGIN_FAIL = "登录失败";
 	public static String LOGIN_SUCCESS = "登录成功";
 
 	public static String USERNAME_NO = "用户不存在";
 	public static String PASSWORD_NO = "密码错误";
+	public static String USER_USERNAME_YES = "用户名已注册";
 
 	public static String CURRENT_SELLER = "seller";
 	public static String CURRENT_SELLER_NAME = "seller_name";

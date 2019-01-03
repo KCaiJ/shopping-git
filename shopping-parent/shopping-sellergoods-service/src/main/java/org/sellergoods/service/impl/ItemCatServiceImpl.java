@@ -56,6 +56,13 @@ public class ItemCatServiceImpl extends BaseServiceImpl<TbItemCat>implements Ite
 		return ItemCatMapper.selectByExample(example);
 	}
 	
+	@Override
+	public List<TbItemCat> findByParentIdWEB(Long parentId) {
+		Example example = new Example(TbItemCat.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("parentId", parentId);
+		return ItemCatMapper.selectByExample(example);
+	}
 	/**
 	 * 缓存模板ID
 	 */

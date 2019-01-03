@@ -48,7 +48,13 @@ public class UserController {
 		System.out.println(smscode+"   "+checkSmsCode);
 		if(!checkSmsCode){
 			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.CODE_SEND_ERROR);
-		}		
+		}
+		/**
+		 * 检查用户名是否存在
+		 */
+		if (Service.check("username",bean.getUsername())) {
+			return new Result(Enumeration.CODE_SUCCESS, false, Enumeration.USER_USERNAME_YES);
+		}
 		try {
 			bean.setCreated(new Date());//创建日期
 			bean.setUpdated(new Date());//修改日期

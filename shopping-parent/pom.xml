@@ -299,5 +299,6 @@
 		<module>shopping-user</module>
 		<module>shopping-cart</module>
 		<module>shopping-order</module>
+		<module>shopping-pay</module>
 	</modules>
 </project>

@@ -124,7 +124,8 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 		//排序处理
 		
 		String sortValue=(String) searchMap.get("sort");//ASC DESC
-		String sortFieId=(String) searchMap.get("sortFieId");//需要排序的字段
+		String sortFieId=(String) searchMap.get("sortFieid");//需要排序的字段
+		System.out.println(sortValue+"   "+searchMap);
 		if (sortValue.equals("ASC")) {
 			Sort sort=new Sort(Sort.Direction.ASC,"item_"+sortFieId);
 			query.addSort(sort);

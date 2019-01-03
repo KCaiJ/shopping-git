@@ -20,4 +20,11 @@ public interface UserService extends BaseService<TbUser>{
 	 * 根据用户名获取实体
 	 */
 	public TbUser findOneByName(String name) ;
+	
+	/**
+	 * 检查字段名是否存在
+	 */
+	public boolean check(String pro,String name);
+		
+	
 }

@@ -96,4 +96,18 @@ public class UserServiceImpl extends BaseServiceImpl<TbUser>implements UserServi
 		return null;
 	}
 
+	/**
+	 * 检查字段名是否存在
+	 */
+	@Override
+	public boolean check(String pro,String name) {
+		Example example = new Example(TbUser.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo(pro, name);
+		ArrayList<TbUser> list = (ArrayList<TbUser>) mapper.selectByExample(example);
+		if (list.size() > 0) {
+			return true;
+		}
+		return false;
+	}
 }
