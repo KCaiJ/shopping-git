@@ -200,7 +200,7 @@ public class OrderServiceImpl extends BaseServiceImpl<TbOrder>implements OrderSe
 		for(String orderId:orderIds){
 			TbOrder order = orderMapper.selectByPrimaryKey(Long.parseLong(orderId) );
 			if(order!=null){
-				order.setStatus("2");//已付款
+				order.setStatus("3");//等待发货
 				orderMapper.updateByPrimaryKey(order);
 			}			
 		}

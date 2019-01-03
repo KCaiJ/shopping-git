@@ -55,7 +55,7 @@ public class UserServiceImpl extends BaseServiceImpl<TbUser>implements UserServi
 		System.out.println("验证码：" + code);
 		// 存入缓存
 		redisTemplate.boundHashOps("smscode").put(phone, code);
-		redisTemplate.expire("smscode", 60, TimeUnit.SECONDS);
+		redisTemplate.expire("smscode", 100, TimeUnit.SECONDS);
 		// 发送到activeMQ
 		jmsTemplate.send(smsDestination, new MessageCreator() {
 			@Override
